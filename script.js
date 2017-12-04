@@ -20,6 +20,8 @@ var center = canvasWidth / 2;
 var paddleX = (center - (paddleWidth / 2));
 var rightPressed = false;
 var leftPressed = false;
+var score = document.getElementById("score");
+var num = score.innerHTML;
 document.addEventListener("keydown", keyDownHandler, false)
 document.addEventListener("keyup", keyUpHandler, false)
 
@@ -61,6 +63,52 @@ function keyUpHandler(e) {
     }
 }
 
+function wallCollision () {
+    if(ballX >= (canvasWidth - ballRadius) || ballX <= 0) {
+        dx = -dx;
+    }
+
+    if(ballY <= (0 + ballRadius)) {
+        dy = -dy;
+    }
+}
+
+function paddleCollision() {
+    if(ballX >= paddleX && ballX <= (paddleX + paddleWidth) && ballY >= paddleTop - ballRadius) {
+        dy = -dy;
+        num++;
+        score.innerHTML = num;
+    }
+}
+
+function scoreColor() {
+    if(num <= 9) {
+        score.style.color = "black";
+    } else if(num >= 10) {
+        score.style.color = "blue";
+    } else if(num >= 20) {
+        score.style.color = "orange";
+    } else if(num >= 30) {
+        score.style.color = "gold";
+    }
+}
+
+function paddleMovement() {
+    if(rightPressed == true && (paddleX + paddleWidth) < canvasWidth) {
+        paddleX += 5;
+    }
+ 
+    if(leftPressed == true && paddleX > 0) {
+     paddleX -= 5;
+    }
+}
+
+function gameOver() {
+    if(ballY > paddleTop) {
+        alert("Game Over Nerd!");
+        clearInterval();
+    }
+}
 
 
 
@@ -72,30 +120,13 @@ setInterval(function(){
     drawBall();
     drawPaddle();
     // Collision Logic
-    if(ballX >= (canvasWidth - ballRadius) || ballX <= 0) {
-        dx = -dx;
-    }
-
-    if(ballY <= (0 + ballRadius)) {
-        dy = -dy;
-    }
-
+    wallCollision();
     // Paddle Collision Logic
-    if(ballX >= paddleX && ballX <= (paddleX + paddleWidth) && ballY >= paddleTop - ballRadius) {
-        dy = -dy;
-    }
-
+    paddleCollision();
+    scoreColor();
     // Paddle Movement Logic
-    if(rightPressed == true && (paddleX + paddleWidth) < canvasWidth) {
-            paddleX += 5;
-        }
-     
-    if(leftPressed == true && paddleX > 0) {
-        paddleX -= 5;
-    }
-
-
-
+    paddleMovement();
+    gameOver();
     ballX += dx;
     ballY += dy;    
 }, 10);
