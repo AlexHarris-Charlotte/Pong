@@ -1,11 +1,6 @@
 
-// Need to make paddle
-
-// need to make collision logic for top, sides, and paddle
 
 // Need a game over 
-
-// Need to increment movement
 
 // Variables
 var canvas = document.getElementById('myCanvas');
@@ -14,12 +9,13 @@ var canvasWidth = 360;
 var canvasHeight = 360;
 var ballRadius = 10;
 var ballX = canvasWidth / 2;
-var ballY = canvasHeight - 30;
+var ballY = canvasHeight - 50;
 var dx = 2;
 var dy = -2;
 var paddleY;
 var paddleWidth = 75;
 var paddleHeight = 20;
+var paddleTop = (canvasHeight - paddleHeight);
 var center = canvasWidth / 2;
 var paddleX = (center - (paddleWidth / 2));
 var rightPressed = false;
@@ -84,11 +80,17 @@ setInterval(function(){
         dy = -dy;
     }
 
+    // Paddle Collision Logic
+    if(ballX >= paddleX && ballX <= (paddleX + paddleWidth) && ballY >= paddleTop - ballRadius) {
+        dy = -dy;
+    }
+
     // Paddle Movement Logic
-    if(rightPressed == true) {
-        paddleX += 5;
-    } 
-    if(leftPressed == true) {
+    if(rightPressed == true && (paddleX + paddleWidth) < canvasWidth) {
+            paddleX += 5;
+        }
+     
+    if(leftPressed == true && paddleX > 0) {
         paddleX -= 5;
     }
 
