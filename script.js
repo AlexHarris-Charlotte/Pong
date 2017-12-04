@@ -79,19 +79,21 @@ function paddleCollision() {
         num++;
         score.innerHTML = num;
     }
+    return num;
 }
 
-function scoreColor() {
-    if(num <= 9) {
-        score.style.color = "black";
-    } else if(num >= 10) {
-        score.style.color = "blue";
-    } else if(num >= 20) {
-        score.style.color = "orange";
-    } else if(num >= 30) {
-        score.style.color = "gold";
-    }
-}
+// function scoreSpeed() {
+//      if(num >= 10) {
+//         dx = 3;
+//         dy = -3; 
+//     } else if(num >= 20) {
+//         dx = 5;
+//         dy = -5;
+//     } else if(num >= 30) {
+//         dx = 7;
+//         dy = -7;
+//     }
+// }
 
 function paddleMovement() {
     if(rightPressed == true && (paddleX + paddleWidth) < canvasWidth) {
@@ -119,11 +121,11 @@ setInterval(function(){
     document.addEventListener("keyup", keyUpHandler, false) 
     drawBall();
     drawPaddle();
-    // Collision Logic
-    wallCollision();
     // Paddle Collision Logic
     paddleCollision();
-    scoreColor();
+    // scoreSpeed();
+    // Collision Logic
+    wallCollision();
     // Paddle Movement Logic
     paddleMovement();
     gameOver();
