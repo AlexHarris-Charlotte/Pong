@@ -1,5 +1,6 @@
 
 
+
 // Need a game over 
 
 // Variables
@@ -82,19 +83,6 @@ function paddleCollision() {
     return num;
 }
 
-// function scoreSpeed() {
-//      if(num >= 10) {
-//         dx = 3;
-//         dy = -3; 
-//     } else if(num >= 20) {
-//         dx = 5;
-//         dy = -5;
-//     } else if(num >= 30) {
-//         dx = 7;
-//         dy = -7;
-//     }
-// }
-
 function paddleMovement() {
     if(rightPressed == true && (paddleX + paddleWidth) < canvasWidth) {
         paddleX += 5;
@@ -107,7 +95,7 @@ function paddleMovement() {
 
 function gameOver() {
     if(ballY > paddleTop) {
-        alert("Game Over Nerd!");
+        alert("Game Over! Refresh the Page for another Round!");
         clearInterval();
     }
 }
@@ -121,12 +109,8 @@ setInterval(function(){
     document.addEventListener("keyup", keyUpHandler, false) 
     drawBall();
     drawPaddle();
-    // Paddle Collision Logic
     paddleCollision();
-    // scoreSpeed();
-    // Collision Logic
     wallCollision();
-    // Paddle Movement Logic
     paddleMovement();
     gameOver();
     ballX += dx;
