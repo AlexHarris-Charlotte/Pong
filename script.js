@@ -26,7 +26,7 @@ var num = score.innerHTML;
 document.addEventListener("keydown", keyDownHandler, false)
 document.addEventListener("keyup", keyUpHandler, false)
 
-
+alert("Use the left and right arrow keys to navigate your paddle.");
 
 // functions 
 
@@ -41,7 +41,7 @@ function drawBall() {
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleX, (canvasHeight - 30), paddleWidth, paddleHeight)
-    ctx.fillStyle = "orange";
+    ctx.fillStyle = "black";
     ctx.fill();
     ctx.closePath();
 }
